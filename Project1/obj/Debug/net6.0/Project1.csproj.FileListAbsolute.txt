@@ -28,3 +28,4 @@ F:\Project for 8th semseter\Project1\Project1\obj\Debug\net6.0\refint\Project1.d
 F:\Project for 8th semseter\Project1\Project1\obj\Debug\net6.0\Project1.pdb
 F:\Project for 8th semseter\Project1\Project1\obj\Debug\net6.0\Project1.genruntimeconfig.cache
 F:\Project for 8th semseter\Project1\Project1\obj\Debug\net6.0\ref\Project1.dll
+F:\Project for 8th semseter\Project1\Project1\obj\Debug\net6.0\Project1.sourcelink.json

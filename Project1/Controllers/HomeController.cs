@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Project1.Models;
 using System.Diagnostics;
 
@@ -17,6 +18,19 @@ namespace Project1.Controllers
         {
             return View();
         }
+
+        // Add this action method to handle the form submission
+        [HttpPost]
+        public IActionResult SubmitForm(FormModel formData)
+        {
+            // Process the form data here
+            // Example: Log the received data
+            _logger.LogInformation($"Mantralaya: {formData.Mantralaya}, Karlaya: {formData.Karlaya}");
+
+            // Return a response if needed
+            return Json(new { success = true });
+        }
+
 
         public IActionResult Privacy()
         {
