@@ -1,0 +1,98 @@
+﻿@* Add these scripts to include jQuery and Kendo UI *@
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2022.1.301/js/kendo.all.min.js"></script>
+
+@* Your existing HTML code *@
+<div class="column">
+    <form id="expenditureForm1">
+        <label for="financialYear">आर्थिक वर्ष:</label>
+        <select id="financialYear" name="financialYear" required>
+            <option value="2021-2022">2021-2022</option>
+            <option value="2022-2023">2022-2023</option>
+        </select>
+    </form>
+
+    <form id="expenditureForm2">
+        <label for="formNumber">खर्च निकासा फाराम नं.:</label>
+        <input type="text" id="formNumber" name="formNumber" required>
+    </form>
+</div>
+
+<div class="column">
+    <form id="expenditureForm3">
+        <label for="demandFormNumber">खर्च निकासा गरिएका माग फाराम नं.:</label>
+        <input type="text" id="demandFormNumber" name="demandFormNumber" required>
+    </form>
+
+    <form id="expenditureForm4">
+        <label for="datepicker">मिति:</label>
+        <input type="date" id="datepicker" name="date" required>
+    </form>
+    <br />
+    <br />
+    <br />
+
+    <div id="grid"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Initialize Kendo DropDownList
+        $("#financialYear").kendoDropDownList();
+
+        // Dummy data for dropdowns
+        var dummyData = ["Option 1", "Option 2", "Option 3"];
+        var dummyData2 = ["455", "466", "477"];
+
+        // Populate dropdown in the form with id "expenditureForm2"
+        var form2Dropdown = $("#formNumber").kendoDropDownList({
+            dataSource: dummyData
+        }).data("kendoDropDownList");
+
+        // Populate dropdown in the form with id "expenditureForm3"
+        var form3Dropdown = $("#demandFormNumber").kendoDropDownList({
+            dataSource: dummyData2
+        }).data("kendoDropDownList");
+
+        // Initialize Kendo DatePicker
+        $("#datepicker").kendoDatePicker();
+
+        // Initialize Kendo Grid
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { fname: "Jane", "S.No": "SN001", Specification: "SPEC-001" }
+            ]
+        });
+
+        $("#grid").kendoGrid({
+            columns: [{
+                title: "खर्च भएर जाने जिन्सी मालसामानको निकासा गरिएको",
+                columns: [
+                    { field: "fname", title: "नाम" },
+                    { field: "S.No", title: "सङ्केत नम्बर" },
+                    { field: "Specification", title: "स्पेसिफिकेसन" },
+                    { field: "Unit", title: "एकाइ" },
+                    { field: "quantity", title: "परिमाण" }
+                ]
+            }, {
+                field: "जम्मा रकम"
+            }],
+              
+            dataSource: dataSource,
+            dataBound: function (e) {
+                var grid = e.sender;
+                grid.autoFitColumns(grid.columns[0].columns);
+            },
+        });
+
+        // Add form submission events
+        $(".column form").submit(function (event) {
+            event.preventDefault();
+
+            // Update the data source as needed
+            dataSource.data([
+                { fname: "NewName", "S.No": "SN002", Specification: "SPEC-002" }
+            ]);
+        });
+    });
+</script>
